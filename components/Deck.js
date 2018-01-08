@@ -48,7 +48,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#b7e7d7",
-    margin: 5,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 10,
+    marginBottom: 5,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#008080',

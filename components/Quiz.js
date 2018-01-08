@@ -249,9 +249,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     alignContent: "center",
-    marginTop: 100,
-    width: 200,
-    height: 44
+    marginTop: 50,
+    width: Dimensions.get("window").width - 120,
   },
   button: {
     margin: 5,

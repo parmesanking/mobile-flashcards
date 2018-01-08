@@ -46,7 +46,10 @@ export const addDeck = deck => dispatch => {
       })
     ).then(err => {
       if (err == null) {
-        return getDecks()(dispatch);
+        //refreshing full deck list in redux
+        getDecks()(dispatch)
+        //returning new deck
+        return deck;
       }
     });
   }

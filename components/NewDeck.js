@@ -20,10 +20,15 @@ class NewDeck extends React.Component {
   onSaveDeckPress() {
     addDeck({ title: this.state.deckTitle, questions: [] })(this.props.dispatch)
       .then(deck => {
-        this.setState({ deckTitle: "" });
-        Alert.alert("Confirm", "New deck has been created!", [
-          { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]);
+        this.setState({ deckTitle: "" }, () => {
+          //moving to Home
+          this.props.navigation.navigate("Home");
+          //then opening detail of newly added deck
+          this.props.navigation.navigate("DeckList", {
+            name: deck.title,
+            deckId: deck.id
+          });
+        });
       })
       .catch(err => console.log("error saving deck", err));
   }
@@ -35,7 +40,7 @@ class NewDeck extends React.Component {
         <TextInput
           style={styles.input}
           value={this.state.deckTitle}
-          underlineColorAndroid={'transparent'}
+          underlineColorAndroid={"transparent"}
           onChangeText={input => this.setState({ deckTitle: input })}
         />
 
@@ -77,8 +82,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#d3d3d3",
     paddingLeft: 5,
-    paddingRight: 5, 
-    
+    paddingRight: 5
   },
   button: {
     margin: 5,

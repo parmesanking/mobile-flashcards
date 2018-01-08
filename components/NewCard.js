@@ -5,12 +5,11 @@ import {
   View,
   KeyboardAvoidingView,
   TextInput,
-  Picker,
   TouchableOpacity,
   Dimensions,
   Alert
 } from "react-native";
-import { addCad, addCard } from "../helpers/deckHelper";
+import { addCard } from "../helpers/deckHelper";
 import { connect } from "react-redux";
 
 class NewCard extends React.Component {
@@ -56,21 +55,17 @@ class NewCard extends React.Component {
           value={this.state.question}
           onChangeText={input => this.setState({ question: input })}
         />
-        <Picker
-          selectedValue={this.state.answer}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({ answer: itemValue })
-          }
-        >
-          <Picker.Item key={0} label="" value="" />
-          <Picker.Item key={1} label="Yes" value="yes" />
-          <Picker.Item key={2} label="No" value="no" />
-        </Picker>
+        <TextInput
+          style={styles.input}
+          placeholder="Answer"
+          value={this.state.answer}
+          onChangeText={input => this.setState({ answer: input })}
+        />
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.onSaveCardPress()}
         >
-          <Text>Save</Text>
+          <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
@@ -103,22 +98,33 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingRight: 5
   },
-  picker: {
+  answerRow: {
+    flexDirection: "row",
     alignItems: "center",
-    alignContent: "center",
+    justifyContent: "space-between",
     width: Dimensions.get("window").width - 40,
-    height: 88,
+    height: 44,
     backgroundColor: "#FFF",
     borderWidth: 1,
     borderColor: "#d3d3d3",
+    paddingLeft: 5,
+    paddingRight: 5
   },
   button: {
     margin: 5,
     borderRadius: 5,
     borderWidth: 1,
     padding: 10,
-    borderColor: "black"
-  }
+    width: Dimensions.get("window").width - 80, 
+    backgroundColor: '#1d396f',
+    borderColor: '#1d396f',
+  },   
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "bold"
+  },
 });
 
 export default connect()(NewCard);

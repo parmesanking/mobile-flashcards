@@ -10,7 +10,6 @@ class DeckList extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props)
     if (
       this.props.navigation.state.params &&
       this.props.navigation.state.params.deckId != null
@@ -31,7 +30,7 @@ class DeckList extends React.Component {
     let deck = this.props.decks.filter(deck => deck.id === deck_id)[0];
     console.log("title", deck.title);
     this.props.navigation.navigate("DeckList", {
-      title: deck.title,
+      name: deck.title,
       deckId: deck_id
     });
   }
@@ -46,11 +45,16 @@ class DeckList extends React.Component {
   }
   onStartQuiz(deck_id) {
     console.log("start quiz on", deck_id);
+    let deck = this.props.decks.filter(deck => deck.id === deck_id)[0];
+    this.props.navigation.navigate("Quiz", {
+      deck: deck, 
+      deckTitle: deck.title,
+    });
   }
 
   render() {
     return this.props.decks.length === 0 ? (
-      <Text>No decks available, please create your first deck</Text>
+      <Text style={styles.text}>No decks available, please create your first deck</Text>
     ) : (
       <FlatList
         style={styles.container}
@@ -80,6 +84,13 @@ const mapStateToProps = state => {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  }, 
+  text:{
+    flex: 0.1,
+    textAlign:'center',
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    marginTop: 100
   }
 });
 

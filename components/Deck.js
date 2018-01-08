@@ -5,7 +5,8 @@ import {
   Text,
   StyleSheet,
   TouchableHighlight,
-  Button
+  Button, 
+  Dimensions
 } from "react-native";
 
 const Deck = props => {
@@ -20,7 +21,7 @@ const Deck = props => {
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.subTitle}>
           {props.questions.length > 0
-            ? `${props.questions.length} cards`
+            ? `${props.questions.length} card${props.questions.length > 1  ? 's' : ''}`
             : "No cards available"}
         </Text>
         {!props.collapsed && (
@@ -29,13 +30,13 @@ const Deck = props => {
               style={styles.button}
               onPress={() => props.onAddCard(props.id)}
             >
-              <Text>Add Card</Text>
+              <Text style={styles.buttonText}>Add Card</Text>
             </TouchableOpacity>
             {props.questions.length > 0  && <TouchableOpacity
               style={styles.button}
               onPress={() => props.onStartQuiz(props.id)}
             >
-              <Text>Start Quiz</Text>
+              <Text style={styles.buttonText}>Start Quiz</Text>
             </TouchableOpacity>}
           </View>
         )}
@@ -47,10 +48,11 @@ const Deck = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F4A460",
+    backgroundColor: "#b7e7d7",
     margin: 5,
     borderRadius: 10,
     borderWidth: 1,
+    borderColor: '#008080',
     alignSelf: "stretch"
   },
   title: {
@@ -77,12 +79,20 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   button: {
-    margin:5, 
+    margin: 5,
     borderRadius: 5,
     borderWidth: 1,
     padding: 10,
-    borderColor: "black"
-  }
+    width: Dimensions.get("window").width - 80, 
+    backgroundColor: '#1d396f',
+    borderColor: '#1d396f',
+  },   
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "bold"
+  },
 });
 
 export default Deck;

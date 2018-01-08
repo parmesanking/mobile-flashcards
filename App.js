@@ -1,15 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StyleSheet, Text, View, StatusBar, Picker } from "react-native";
 import { TabNavigator, StackNavigator } from "react-navigation";
 import DeckList from "./components/DeckList";
 import Deck from "./components/Deck";
 import NewDeck from "./components/NewDeck";
 import NewCard from "./components/NewCard"
+import Quiz from "./components/Quiz"
 import { Constants } from "expo";
 import { Foundation, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
+import { setLocalNotification} from './helpers/notification'
 
 const Tabs = TabNavigator(
   {
@@ -58,9 +60,10 @@ const MainNavigator = StackNavigator({
   DeckList: {
     screen: DeckList,
     navigationOptions: {
+      title: 'Deck details',
       headerTintColor: "#FFF",
       headerStyle: {
-        backgroundColor: "#888"
+        backgroundColor: "#008080"
       }
     }
   },
@@ -70,7 +73,17 @@ const MainNavigator = StackNavigator({
       title: 'Add a card',
       headerTintColor: "#FFF",
       headerStyle: {
-        backgroundColor: "#888"
+        backgroundColor: "#008080"
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      title: 'Quiz',
+      headerTintColor: "#FFF",
+      headerStyle: {
+        backgroundColor: "#008080"
       }
     }
   }
@@ -78,19 +91,22 @@ const MainNavigator = StackNavigator({
 });
 
 export default class App extends React.Component {
+  componentDidMount(){
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{ flex: 1 }}>
           <View
             style={{
-              backgroundColor: "green",
+              backgroundColor: "#008080",
               height: Constants.statusBarHeight
             }}
           >
             <StatusBar
               translucent
-              backgroundColor={"green"}
+              backgroundColor={"#008080"}
               barStyle="light-content"
             />
           </View>
@@ -104,7 +120,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "green",
+    backgroundColor: "#008080",
     alignItems: "center",
     justifyContent: "center"
   }

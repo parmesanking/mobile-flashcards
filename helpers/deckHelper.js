@@ -15,10 +15,14 @@ export const getDecks = () => dispatch => {
   console.log("GetDECKS", dispatch);
   return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
     let decks = [];
-    let res = JSON.parse(results);
-    Object.keys(res).map(key => decks.push(res[key]));
-    dispatch && dispatch(acts.deckList(decks));
-    return decks;
+    if (results == null) {
+      return [];
+    } else {
+      let res = JSON.parse(results);
+      Object.keys(res).map(key => decks.push(res[key]));
+      dispatch && dispatch(acts.deckList(decks));
+      return decks;
+    }
   });
 };
 

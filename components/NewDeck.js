@@ -35,6 +35,7 @@ class NewDeck extends React.Component {
         <TextInput
           style={styles.input}
           value={this.state.deckTitle}
+          underlineColorAndroid={'transparent'}
           onChangeText={input => this.setState({ deckTitle: input })}
         />
 
@@ -76,7 +77,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#d3d3d3",
     paddingLeft: 5,
-    paddingRight: 5
+    paddingRight: 5, 
+    
   },
   button: {
     margin: 5,

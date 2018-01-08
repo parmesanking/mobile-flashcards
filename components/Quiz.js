@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   Switch,
   TouchableOpacity,
   Dimensions,
@@ -47,6 +46,10 @@ class Quiz extends React.Component {
       inputRange: [0, 180],
       outputRange: ["180deg", "360deg"]
     });
+  }
+
+  componentWillUnmount(){
+    this.animatedValue.removeAllListeners()
   }
 
   componentDidMount() {

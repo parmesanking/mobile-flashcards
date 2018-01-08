@@ -50,12 +50,14 @@ class NewCard extends React.Component {
         <TextInput
           style={styles.input}
           placeholder="Question"
+          underlineColorAndroid={'transparent'}
           value={this.state.question}
           onChangeText={input => this.setState({ question: input })}
         />
         <TextInput
           style={styles.input}
           placeholder="Answer"
+          underlineColorAndroid={'transparent'}
           value={this.state.answer}
           onChangeText={input => this.setState({ answer: input })}
         />

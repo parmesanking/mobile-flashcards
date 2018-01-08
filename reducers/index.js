@@ -1,20 +1,25 @@
-import { DECK_LIST, DECK_DETAIL } from '../actions'
+import { DECK_LIST, DECK_DETAIL } from "../actions";
 
-function entries (state = {}, action) {
+const INITIAL_STATE = {
+  decks: null,
+  deck: null
+};
+
+function entries(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case DECK_LIST :
+    case DECK_LIST:
       return {
         ...state,
-        decks: action.decks,
-      }
+        decks: action.decks
+      };
     case DECK_DETAIL:
-    return {
+      return {
         ...state,
-        deck: action.deck,
-    }
-    default :
-      return state
+        deck: action.deck
+      };
+    default:
+      return state;
   }
 }
 
-export default entries
+export default entries;

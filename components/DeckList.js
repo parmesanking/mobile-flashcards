@@ -14,7 +14,7 @@ class DeckList extends React.Component {
       this.props.navigation.state.params &&
       this.props.navigation.state.params.deckId != null
     ) {
-      console.log("DECKID",this.props.navigation.state.params.deckId)
+
       this.setState(
         {
           deckSelected: this.props.navigation.state.params.deckId
@@ -28,7 +28,7 @@ class DeckList extends React.Component {
 
   onDeckPress(deck_id) {
     let deck = this.props.decks.filter(deck => deck.id === deck_id)[0];
-    console.log("title", deck.title);
+
     this.props.navigation.navigate("DeckList", {
       name: deck.title,
       deckId: deck_id
@@ -36,7 +36,6 @@ class DeckList extends React.Component {
   }
 
   onAddCard(deck_id) {
-    console.log("add card on", deck_id);
     let deck = this.props.decks.filter(deck => deck.id === deck_id)[0];
     this.props.navigation.navigate("AddCard", {
       deckId: deck_id, 
@@ -44,7 +43,6 @@ class DeckList extends React.Component {
     });
   }
   onStartQuiz(deck_id) {
-    console.log("start quiz on", deck_id);
     let deck = this.props.decks.filter(deck => deck.id === deck_id)[0];
     this.props.navigation.navigate("Quiz", {
       deck: deck, 

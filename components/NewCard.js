@@ -28,7 +28,6 @@ class NewCard extends React.Component {
         [{ text: "OK", onPress: () => console.log("OK Pressed") }]
       );
     } else {
-      console.log("card can be saved....");
       addCard(this.props.navigation.state.params.deckId, {
         question: this.state.question,
         answer: this.state.answer

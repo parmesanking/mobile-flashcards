@@ -12,7 +12,6 @@ export const getDeck = deckId => dispatch => {
   });
 };
 export const getDecks = () => dispatch => {
-  console.log("GetDECKS", dispatch);
   return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
     let decks = [];
     if (results == null) {
@@ -27,14 +26,13 @@ export const getDecks = () => dispatch => {
 };
 
 export const addDeck = deck => dispatch => {
-  console.log("addDeck", deck.id, dispatch);
   if (deck.id == null) {
     return getDecks()().then(decks => {
       var id = decks.reduce((prev, curr) => {
         return curr.id > prev ? curr.id : prev;
       }, 0);
       id = id + 1;
-      console.log("New id", id);
+
       return addDeck({ id: id, ...deck })(dispatch);
     });
   } else {

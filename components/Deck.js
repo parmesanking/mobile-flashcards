@@ -10,7 +10,6 @@ import {
 } from "react-native";
 
 const Deck = props => {
-  //console.log("Deck", props.title, props.questions);
   return (
     <TouchableOpacity
       style={styles.container}

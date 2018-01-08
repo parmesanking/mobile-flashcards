@@ -14,7 +14,10 @@ import {
 import { addCard } from "../helpers/deckHelper";
 import { connect } from "react-redux";
 import { FontAwesome } from "@expo/vector-icons";
-import { clearLocalNotification, setLocalNotification} from '../helpers/notification'
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from "../helpers/notification";
 class Quiz extends React.Component {
   state = {
     deck: null,
@@ -52,10 +55,9 @@ class Quiz extends React.Component {
   }
 
   onQuestionAnswer(answer) {
-    console.log("Answer:", answer);
     //clear notification for today
-    if (this.state.completedQuestions == 0 ){
-        clearLocalNotification().then(() => setLocalNotification())
+    if (this.state.completedQuestions == 0) {
+      clearLocalNotification().then(() => setLocalNotification());
     }
 
     this.setState({
@@ -63,24 +65,22 @@ class Quiz extends React.Component {
       correctAnswers: this.state.correctAnswers + (answer ? 1 : 0),
       isCurrentCorrect: answer
     });
-    
-
   }
 
   showAnswer() {
-    this.flipCard(this.state.isCardFlipped)
+    this.flipCard(this.state.isCardFlipped);
   }
 
-  flipCard(toFront){
+  flipCard(toFront) {
     Animated.spring(this.animatedValue, {
-        toValue: toFront ? 0 : 180,
-        friction: 8,
-        tension: 10
-      }).start();
+      toValue: toFront ? 0 : 180,
+      friction: 8,
+      tension: 10
+    }).start();
   }
 
   nextQuestion() {
-    this.flipCard(true)
+    this.flipCard(true);
     this.setState({
       currentQuestionIx: this.state.currentQuestionIx + 1,
       isCurrentCorrect: null
@@ -88,7 +88,7 @@ class Quiz extends React.Component {
   }
 
   onRestartQuiz() {
-    this.flipCard(true)
+    this.flipCard(true);
     this.setState({
       currentQuestionIx: 0,
       completedQuestions: 0,
@@ -195,20 +195,25 @@ class Quiz extends React.Component {
                 this.state.deck.questions.length - 1 && (
                 <Button
                   style={[styles.title]}
-                  title="Next Question"
+                  title={`Next (${this.state.deck.questions.length -
+                    1 -
+                    this.state.currentQuestionIx})`}
                   color="red"
                   onPress={() => this.nextQuestion()}
                 />
               )}
-            {this.state.currentQuestionIx ==
-                this.state.deck.questions.length - 1 && (
-                <Button
-                  style={[styles.title]}
-                  title="Restart Quiz"
-                  color="red"
-                  onPress={() => this.onRestartQuiz()}
-                />
-              )}
+            {((this.state.currentQuestionIx != 0 &&
+              this.state.currentQuestionIx ==
+                this.state.deck.questions.length - 1) ||
+              (this.state.currentQuestionIx == 0 &&
+                this.state.completedQuestions > 0)) && (
+              <Button
+                style={[styles.title]}
+                title="Restart Quiz"
+                color="red"
+                onPress={() => this.onRestartQuiz()}
+              />
+            )}
           </View>
         </View>
       )

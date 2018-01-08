@@ -27,7 +27,7 @@ export function clearLocalNotification () {
   }
   
   export function setLocalNotification () {
-    console.log("setting notification")
+    console.log("Setting notification")
     AsyncStorage.getItem(NOTIFICATION_KEY)
       .then(JSON.parse)
       .then((data) => {
@@ -35,7 +35,7 @@ export function clearLocalNotification () {
           Permissions.askAsync(Permissions.NOTIFICATIONS)
             .then(({ status }) => {
               if (status === 'granted') {
-                console.log("granted")
+                console.log("Notification has been granted")
                 Notifications.cancelAllScheduledNotificationsAsync()
   
                 let tomorrow = new Date()

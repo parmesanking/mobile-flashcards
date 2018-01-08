@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { addCard } from "../helpers/deckHelper";
 import { connect } from "react-redux";
+import {NavigationActions} from 'react-navigation'
 
 class NewCard extends React.Component {
   state = {
@@ -34,9 +35,7 @@ class NewCard extends React.Component {
       })(this.props.dispatch)
         .then(deck => {
           this.setState({ question: "", answer: "" });
-          Alert.alert("Confirm", "New card has been added to selected deck!", [
-            { text: "OK", onPress: () => console.log("OK Pressed") }
-          ]);
+          this.props.navigation.dispatch(NavigationActions.back())
         })
         .catch(err => console.log("error adding card to deck"));
     }
